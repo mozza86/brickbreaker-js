@@ -1,6 +1,9 @@
 export function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+export function randomFloat(min, max) {
+    return Math.random() * (max - min + 1) + min;
+}
 
 export function collision(rect1, rect2) {
     return  rect1.x + rect1.width  > rect2.x &&     // Rectangle 1 est à droite de Rectangle 2
@@ -38,4 +41,33 @@ export function bounce(ball, direction) {
     if (direction === "top") ball.directionY = 1
     if (direction === "right") ball.directionX = -1
     if (direction === "left") ball.directionX = 1
+}
+
+export function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+
+export let keyHistory = []
+//if (keyHistory.length === 3 && keyHistory[keyHistory.length-3] === "g" && keyHistory[keyHistory.length-2] === "a" && keyHistory[keyHistory.length-1] === "y") {}
+export function hidden(word) {
+    if (keyHistory.length < word.length) {
+        return false;
+    }
+
+    let recentKeys = keyHistory.slice(-word.length);
+
+    if (recentKeys.join('') === word) {
+        keyHistory = []
+        return true;
+    } else {
+        return false;
+    }
 }

@@ -16,13 +16,43 @@
             align-items: center;
             flex-direction: column;
         }
-        canvas {
+        canvas, .game {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .game {
             border: 1px solid chocolate;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <canvas width="500" height="500"></canvas>
+    <div class="scene mainmenu">
+        <h1>Brick breaker</h1>
+        <button id="btStart">Start</button>
+    </div>
+    <div class="scene win">
+        <h1>you won!!!</h1>
+        <button id="btRestart">Restart</button>
+    </div>
+    <div class="scene game">
+        <button id="btGamePause">Pause</button>
+        <button id="btGameMenu">Menu</button>
+        <button id="btGameAuto">Auto</button>
+        <button id="btGameRainbow">Rainbow</button>
+        <button id="btGameAddBall">Add Ball</button>
+        <button id="btGameAddbrick">Add Brick</button>
+        <button id="btGameKeyboard">Keyboard</button>
+        <button id="btGameMouse">Mouse</button>
+        <button id="btGameBedrock">Bedrock</button>
+        <canvas width="500" height="500"></canvas>
+    </div>
     <script type="module" src="index.js"></script>
 </body>
 </html>
