@@ -1,0 +1,8 @@
+services:
+  brickbreaker:
+    container_name: brickbreaker
+    build: .
+    image: brickbreaker
+    ports:
+      - "0.0.0.0::80"
+    restart: unless-stopped

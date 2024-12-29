@@ -1,4 +1,4 @@
-import {randomFloat, randomInteger} from "./utils.js";
+import {collision, randomFloat, randomInteger} from "./utils.js";
 
 export class Brick {
     constructor(game, x, y, width, height, hardness) {
@@ -9,6 +9,17 @@ export class Brick {
         this.height = height;
         this.hardness = hardness;
         this.color = "#A52"
+    }
+
+    update() {
+        for (const rocket of this.game.rockets) {
+            if (collision(this, rocket)) {
+                this.hardness--;
+            }
+        }
+        if (this.hardness < 0) {
+            this.game.removeBrick(this)
+        }
     }
 
     draw() {
@@ -33,6 +44,12 @@ export class Brick {
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.strokeStyle = "#000"
         ctx.strokeRect(this.x, this.y, this.width, this.height);
+
+        ctx.fillStyle = "#000";
+        ctx.font = this.height-this.height/3+"px serif";
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.fillText(this.hardness+1, this.x+this.width/2, this.y+this.height/2);
     }
 
     draw3d() {

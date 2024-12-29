@@ -1,3 +1,6 @@
+import {bounce, collision, collisionSide} from "./utils.js";
+import {PowerUp} from "./PowerUp.js";
+
 export class Ball {
     constructor(game, x, y, width, height, speedX, speedY, directionX, directionY) {
         this.game = game;
@@ -10,6 +13,61 @@ export class Ball {
         this.directionX = directionX;
         this.directionY = directionY;
         this.color = "#58B"
+    }
+
+    update() {
+        if (this.x >= 0) {
+            this.x = this.x - this.speedX * this.directionX
+        } else if (this.x < this.game.app.width - this.width) {
+            this.x = this.x + this.speedX * this.directionX
+        }
+
+        if (this.x < 0) {
+            this.x = 0;
+            this.directionX = -1
+        }
+        if (this.x > this.game.app.width - this.width) {
+            this.x = this.game.app.width - this.width
+            this.directionX = 1
+        }
+
+        if (this.y >= 0) {
+            this.y = this.y - this.speedY * this.directionY
+        } else if (this.y <= this.game.app.height - this.height) {
+            this.y = this.y + this.speedY * this.directionY
+        }
+
+        if (this.y < 0) {
+            this.y = 0;
+            this.directionY = -1
+        }
+        if (this.y > this.game.app.height - this.height) {
+            this.y = this.game.app.height - this.height
+            //death
+            this.on_death()
+        }
+
+        for (const brick of this.game.bricks) {
+            if (this.game.instakill <= 0) bounce(this, collisionSide(brick, this));
+            if (collision(brick, this)) {
+                if (!this.game.bedrockstate) {
+                    if (this.game.instakill > 0) {
+                        this.game.removeBrick(brick)
+                        this.game.instakill -= brick.hardness;
+                    }
+                    brick.hardness -= 1
+                    if (brick.hardness < 0) this.game.removeBrick(brick)
+                    this.game.powerups.unshift(PowerUp.createPowerUp(brick))
+                }
+            }
+        }
+        bounce(this, collisionSide(this.game.paddle, this));
+    }
+
+    on_death() {
+        this.directionY = 0 //1
+        this.directionX = 0
+        this.game.removeBall(this)
     }
 
     draw() {

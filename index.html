@@ -30,27 +30,42 @@
         .hidden {
             display: none;
         }
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
     </style>
 </head>
 <body>
     <div class="scene mainmenu">
         <h1>Brick breaker</h1>
-        <button id="btStart">Start</button>
+        <button class="btStart">Start</button>
     </div>
     <div class="scene win">
         <h1>you won!!!</h1>
-        <button id="btRestart">Restart</button>
+        <button class="btStart">Restart</button>
+    </div>
+    <div class="scene death">
+        <h1>you died!!!</h1>
+        <button class="btStart">Restart</button>
     </div>
     <div class="scene game">
-        <button id="btGamePause">Pause</button>
-        <button id="btGameMenu">Menu</button>
-        <button id="btGameAuto">Auto</button>
-        <button id="btGameRainbow">Rainbow</button>
-        <button id="btGameAddBall">Add Ball</button>
-        <button id="btGameAddbrick">Add Brick</button>
-        <button id="btGameKeyboard">Keyboard</button>
-        <button id="btGameMouse">Mouse</button>
-        <button id="btGameBedrock">Bedrock</button>
+        <div class="controls">
+            <button class="btGamePause">Pause</button>
+            <button class="btGameMenu">Menu</button>
+            <button class="btGameAuto">Auto</button>
+            <button class="btGameRainbow">Rainbow</button>
+            <button class="btGameAddBall">Add Ball</button>
+            <button class="btGameAddbrick">Add Brick</button>
+            <button class="btGameAddPowerUp">Add PowerUp</button>
+            <button class="btGameKeyboard">Keyboard</button>
+            <button class="btGameMouse">Mouse</button>
+            <button class="btGameBedrock">Bedrock</button>
+            <button class="btGameEnlarge">Enlarge</button>
+            <button class="btGameFullWidth">Fat</button>
+            <button class="btStart">Restart</button>
+        </div>
         <canvas width="500" height="500"></canvas>
     </div>
     <script type="module" src="index.js"></script>

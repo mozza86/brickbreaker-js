@@ -1,13 +1,12 @@
 import {keyHistory} from './utils.js'
 import {App} from "./App.js";
-import {Game} from "./Game.js";
 import {Button} from "./Button.js";
 
 //powerup
 //combo powerup
 //rocket a travers bricks
 //mode infini brick respawn
-//ultra instant
+//ultra instinct
 //visée
 //toucher des cibles
 
@@ -18,48 +17,44 @@ let app = new App(canvas, window.innerWidth, window.innerHeight);
 
 document.addEventListener('keypress', ev => keyHistory.push(ev.key));
 
-const btStart = document.querySelector("#btStart")
-const btGamePause = document.querySelector("#btGamePause");
-const btGameAuto = document.querySelector("#btGameAuto");
-const btGameRainbow = document.querySelector("#btGameRainbow");
-const btGameAddBall = document.querySelector("#btGameAddBall");
-const btGameAddbrick = document.querySelector("#btGameAddbrick");
-const btGameKeyboard = document.querySelector("#btGameKeyboard");
-const btGameMouse = document.querySelector("#btGameMouse");
-const btGameBedrock = document.querySelector("#btGameBedrock");
-const btRestart = document.querySelector("#btRestart");
 let pauseCanvas = false;
 
-btStart.addEventListener('click', ev => {
-    app.switchScene("game")
-})
-btGamePause.addEventListener('click', ev => {
+document.querySelectorAll(".btStart").forEach((el) => { el.addEventListener("click", ev => {
+        app.switchScene("game")
+})})
+document.querySelectorAll(".btGamePause").forEach((el) => { el.addEventListener("click", ev => {
     pauseCanvas = !pauseCanvas
-})
-btGameAuto.addEventListener('click', ev => {
+})})
+document.querySelectorAll(".btGameAuto").forEach((el) => { el.addEventListener("click", ev => {
     app.scene.botEnabled = !app.scene.botEnabled
-})
-btGameRainbow.addEventListener('click', ev => {
-    app.scene.raimbowMode = !app.scene.raimbowMode
-})
-btGameAddBall.addEventListener('click', ev => {
+})})
+document.querySelectorAll(".btGameRainbow").forEach((el) => { el.addEventListener("click", ev => {
+    app.raimbowMode = !app.raimbowMode
+})})
+document.querySelectorAll(".btGameAddBall").forEach((el) => { el.addEventListener("click", ev => {
     app.scene.spawnballs += 1
-})
-btGameAddbrick.addEventListener('click', ev => {
+})})
+document.querySelectorAll(".btGameAddbrick").forEach((el) => { el.addEventListener("click", ev => {
     app.scene.spawnbricks += 1
-})
-btGameKeyboard.addEventListener('click', ev => {
+})})
+document.querySelectorAll(".btGameAddPowerUp").forEach((el) => { el.addEventListener("click", ev => {
+    app.scene.spawnpowerups += 1
+})})
+document.querySelectorAll(".btGameKeyboard").forEach((el) => { el.addEventListener("click", ev => {
     app.scene.followMouse = false
-})
-btGameMouse.addEventListener('click', ev => {
+})})
+document.querySelectorAll(".btGameMouse").forEach((el) => { el.addEventListener("click", ev => {
     app.scene.followMouse = true
-})
-btGameBedrock.addEventListener('click', ev => {
+})})
+document.querySelectorAll(".btGameBedrock").forEach((el) => { el.addEventListener("click", ev => {
     app.scene.bedrockstate = !app.scene.bedrockstate
-})
-btRestart.addEventListener('click', ev => {
-    app.switchScene("game")
-})
+})})
+document.querySelectorAll(".btGameEnlarge").forEach((el) => { el.addEventListener("click", ev => {
+    app.scene.paddle.enlarge()
+})})
+document.querySelectorAll(".btGameFullWidth").forEach((el) => { el.addEventListener("click", ev => {
+    app.scene.paddle.width = app.width
+})})
 
 
 

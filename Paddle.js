@@ -9,6 +9,9 @@ export class Paddle {
         this.color = "#000"
     }
 
+    update() {
+
+    }
 
     draw() {
         let ctx = this.game.app.ctx;
@@ -45,6 +48,11 @@ export class Paddle {
         ctx.lineTo(this.x+this.width+size, this.y-size)
         ctx.stroke()
         ctx.closePath();
+    }
+
+
+    enlarge() {
+        this.width += this.game.app.width*0.1
     }
 
     static createPaddle(game) {
